@@ -47,7 +47,9 @@ npm run serve (访问前台系统)
 # 功能列表
 学习中小体会,展示每个模块完成的流程
 - 静态文件准备，`vue create toutiao_vue` 删除多余的文件，下载`vue-router` 创建一些需要的文件夹,引入初始化样式，创建`Login.vue`,配置路由，引入到`main.js`
-
+- 引入 element-ui,调用在main.js,下载axios，单独封装 
+- 注册登录api
+- 登录页调用element-ui的form表单，绑定数据，添加验证，点击提交按钮，再次使用validate验证，拿到token值保存在本地存储，添加路由守卫，防止用户未登录直接进入其他页面操作
 # 部分截图
 ...
 
