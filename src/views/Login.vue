@@ -1,15 +1,13 @@
 <template>
-  <div id="app">
-    hello
-  </div>
+  <div>我是登录页</div>
 </template>
 
 <script>
-
 export default {
-  name: 'app'
+
 }
 </script>
 
-<style lang="less">
+<style>
+
 </style>
