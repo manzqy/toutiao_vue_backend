@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '@/views/Login.vue'
 import Index from '@/views/Index.vue'
+import Welcome from '@/views/Welcome.vue'
+import ArticleList from '@/views/ArticleList.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -13,7 +15,20 @@ const routes = [
   {
     name: 'Index',
     path: '/index',
-    component: Index
+    component: Index,
+    redirect: { name: 'Welcome' },
+    children: [
+      {
+        name: 'Welcome',
+        path: 'welcome',
+        component: Welcome
+      },
+      {
+        name: 'ArticleList',
+        path: 'articleList',
+        component: ArticleList
+      }
+    ]
   }
 ]
 const router = new VueRouter({

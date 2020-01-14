@@ -50,6 +50,12 @@ npm run serve (访问前台系统)
 - 引入 element-ui,调用在main.js,下载axios，单独封装 
 - 注册登录api
 - 登录页调用element-ui的form表单，绑定数据，添加验证，点击提交按钮，再次使用validate验证，拿到token值保存在本地存储，添加路由守卫，防止用户未登录直接进入其他页面操作
+- 引入element-ui的container布局容器
+- 引入element-ui的navMenu,设置基本样式
+- 创建welcome欢迎页面，使用vue嵌套路由
+- 使用element-ui的面包屑导航
+- 使用element-ui的table表格，使用tooltip提示
+- 使用pagnination分页
 # 部分截图
 ...
 
