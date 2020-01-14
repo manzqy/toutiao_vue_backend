@@ -46,7 +46,7 @@ export default {
           let { data: res } = await userLogin(this.form)
           this.$message.success(res.message)
           if (res.message === '登录成功') {
-            localStorage.setItem('tiaotiao_backend_token', JSON.stringify(res.data.token))
+            localStorage.setItem('tiaotiao_backend_token', res.data.token)
             that.$router.push({ name: 'Index' })
           }
         } else {

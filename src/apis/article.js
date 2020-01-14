@@ -5,3 +5,11 @@ export const articleList = (params) => {
     params
   })
 }
+
+export const articlePublish = data => {
+  return axios({
+    method: 'post',
+    url: '/post',
+    data
+  })
+}

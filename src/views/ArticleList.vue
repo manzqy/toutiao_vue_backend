@@ -75,7 +75,6 @@ export default {
         pageIndex: this.pageIndex,
         pageSize: this.pageSize
       })
-      console.log(res)
       this.tableData = res.data
       this.total = res.total
     }

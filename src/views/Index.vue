@@ -30,7 +30,7 @@
               <el-menu-item index="/index/articleList"><i class="el-icon-milk-tea"></i>文章列表</el-menu-item>
             </el-menu-item-group>
             <el-menu-item-group>
-              <el-menu-item index="2-1"><i class="el-icon-milk-tea"></i>文章发布</el-menu-item>
+              <el-menu-item index="/index/articlePublish"><i class="el-icon-milk-tea"></i>文章发布</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
           <el-submenu index="3">
