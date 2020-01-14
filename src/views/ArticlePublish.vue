@@ -115,6 +115,10 @@ export default {
       console.log(this.publishData)
       let { data: res } = await articlePublish(this.publishData)
       console.log(res)
+      if (res.message === '文章发布成功') {
+        this.$message.success('文章发布成功')
+        this.$router.push('/index/articleList')
+      }
     },
     handleCheckAllChange (val) {
       this.publishData.categories = val ? this.cateList.map(v => {
@@ -145,7 +149,7 @@ export default {
   },
   async mounted () {
     let { data: res } = await getColumn()
-    if (this.getToken.Authorization) {
+    if (this.getToken().Authorization) {
       this.cateList = res.data.splice(2)
     } else {
       this.cateList = res.data.splice(1)
