@@ -13,3 +13,18 @@ export const articlePublish = data => {
     data
   })
 }
+
+export const articleDetail = id => {
+  return axios({
+    method: 'get',
+    url: `/post/${id}`
+  })
+}
+
+export const articleEdit = (id, data) => {
+  return axios({
+    method: 'post',
+    url: `/post_update/${id}`,
+    data
+  })
+}

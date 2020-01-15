@@ -42,6 +42,7 @@
             :on-success="picGroup"
             :headers='getToken()'
             :before-remove="delPic"
+            :file-list="publishData.cover"
             >
             <i class="el-icon-plus"></i>
           </el-upload>
@@ -56,7 +57,7 @@
 
 <script>
 import { getColumn } from '@/apis/column'
-import { articlePublish } from '@/apis/article'
+import { articlePublish, articleDetail, articleEdit } from '@/apis/article'
 import VueEditor from 'vue-word-editor'
 import 'quill/dist/quill.snow.css'
 export default {
@@ -113,11 +114,16 @@ export default {
         return { id: v }
       })
       console.log(this.publishData)
-      let { data: res } = await articlePublish(this.publishData)
-      console.log(res)
-      if (res.message === '文章发布成功') {
-        this.$message.success('文章发布成功')
-        this.$router.push('/index/articleList')
+      if (this.getId()) {
+        let { data: res2 } = await articleEdit(this.getId(), this.publishData)
+        console.log(res2)
+      } else {
+        let { data: res } = await articlePublish(this.publishData)
+        console.log(res)
+        if (res.message === '文章发布成功') {
+          this.$message.success('文章发布成功')
+          this.$router.push('/index/articleList')
+        }
       }
     },
     handleCheckAllChange (val) {
@@ -137,14 +143,19 @@ export default {
     picGroup (response) {
       console.log(response)
       if (response.message === '文件上传成功') {
-        this.publishData.cover.push({ id: response.data.id })
+        this.publishData.cover.push({ id: response.data.id, url: `http://127.0.0.1:3000${response.data.url}` })
       }
     },
     delPic (file) {
-      let index = this.publishData.cover.findIndex(v => {
-        return v.id === file.response.data.id
+      let index
+      console.log(file)
+      index = this.publishData.cover.findIndex(v => {
+        return v.id === file.id
       })
       this.publishData.cover.splice(index, 1)
+    },
+    getId () {
+      return this.$route.params.id
     }
   },
   async mounted () {
@@ -153,6 +164,28 @@ export default {
       this.cateList = res.data.splice(2)
     } else {
       this.cateList = res.data.splice(1)
+    }
+    let id = this.getId()
+    if (id) {
+      let { data: res2 } = await articleDetail(id)
+      console.log(res2)
+      this.publishData = res2.data
+      var quill = this.$refs.myeditor.editor
+      quill.clipboard.dangerouslyPasteHTML(0, this.publishData.content)
+      this.publishData.categories = this.publishData.categories.map(v => v.id)
+      if (this.publishData.categories.length === this.cateList.length) {
+        this.checkAll = true
+        this.isIndeterminate = false
+      }
+      this.publishData.cover = this.publishData.cover.map(v => {
+        if (v.url.indexOf('http') === -1) {
+          v.url = 'http://127.0.0.1:3000' + v.url
+        }
+        return {
+          id: v.id,
+          url: v.url
+        }
+      })
     }
   }
 }
